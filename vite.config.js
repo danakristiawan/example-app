@@ -10,5 +10,27 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        {
+            name: 'blade',
+            handleHotUpdate({ file, server }) {
+                if (file.endsWith('.blade.php')) {
+                    server.ws.send({
+                        type: 'full-reload',
+                        path: '*',
+                    });
+                }
+            },
+        },
+        {
+            name: 'controller',
+            handleHotUpdate({ file, server }) {
+                if (file.endsWith('.php')) {
+                    server.ws.send({
+                        type: 'full-reload',
+                        path: '*',
+                    });
+                }
+            },
+        }
     ],
 });
